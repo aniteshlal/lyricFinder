@@ -35,14 +35,21 @@ class Lyrics extends Component {
 
   render() {
     const { track, lyrics } = this.state;
-    console.log(track);
+    // console.log(track);
     if (
       track === undefined ||
       lyrics === undefined ||
       Object.keys(track).length === 0 ||
       Object.keys(lyrics).length === 0
     ) {
-      return <Spinner />;
+      return (
+        <React.Fragment>
+          <Link to="/" className="btn btn-dark btn-sm mb-4">
+            Go Back
+          </Link>
+          <Spinner />
+        </React.Fragment>
+      );
     } else {
       return (
         <React.Fragment>
@@ -57,7 +64,7 @@ class Lyrics extends Component {
             <div className="card-body">
               {" "}
               {lyrics.lyrics_body.split("\n").map((lyric, key) => {
-                console.log(lyric);
+                // console.log(lyric);
                 return (
                   <p key={key} className="card-text">
                     {lyric}
