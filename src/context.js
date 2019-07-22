@@ -3,6 +3,7 @@ import axios from "axios";
 
 const Context = React.createContext();
 
+// this function is used to change the state from another component.
 const reducer = (state, action) => {
   switch (action.type) {
     case "SEARCH_TRACKS":
@@ -24,6 +25,8 @@ export class Provider extends Component {
   };
 
   componentDidMount() {
+    // this axios gets the top 10 songs from the musixmatch api and updates the state
+    // for the top 10 tracks
     axios
       .get(
         `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=10&country=us&f_has_lyrics=1&apikey=${
@@ -38,6 +41,7 @@ export class Provider extends Component {
   }
 
   render() {
+    // when this component is used, the state is passed so that it can be accessed
     return (
       <Context.Provider value={this.state}>
         {this.props.children}

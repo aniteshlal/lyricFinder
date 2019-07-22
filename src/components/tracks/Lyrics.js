@@ -20,14 +20,17 @@ class Lyrics extends Component {
       .then(res => {
         // console.log("get lyrics");
         // console.log(res.data);
+        // checks to see if the api call actually received the lyrics,
+        // if not then it will take care of it and not error out
         if (res.data.message.header.status_code === 200) {
           this.setState({ lyrics: res.data.message.body.lyrics });
         } else {
           var no_lyrics = {
             lyrics_body: "Sorry, no lyrics found. :("
-          }
+          };
           this.setState({ lyrics: no_lyrics });
         }
+        // get the track information api call
         return axios.get(
           `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.get?track_id=${
             this.props.match.params.id
@@ -47,6 +50,8 @@ class Lyrics extends Component {
     // console.log(track);
     // console.log(lyrics)
 
+    // waits till there is data avaible from using the api calls
+    // once data is avaiable, format it and output that lyrics and track information for the song
     if (
       track === undefined ||
       lyrics === undefined ||
@@ -76,6 +81,7 @@ class Lyrics extends Component {
               {" "}
               {lyrics.lyrics_body.split("\n").map((lyric, key) => {
                 // console.log(lyric);
+                // format the lyrics so that each line is its own p tag
                 return (
                   <p key={key} className="card-text">
                     {lyric}
@@ -90,6 +96,7 @@ class Lyrics extends Component {
             </li>
             <li className="list-group-item">
               <strong>Song Genre</strong>:{" "}
+              {/* // making sure that it doesn't error when the song doesn't have a gener list */}
               {Object.keys(track.primary_genres.music_genre_list).length === 0
                 ? "Unknown"
                 : track.primary_genres.music_genre_list[0].music_genre

@@ -13,6 +13,7 @@ class Search extends Component {
 
   findTrack = (dispatch, e) => {
     e.preventDefault();
+    // this axios gets the top 10 matching searches for the songs name and then it updates the context state with the dispatch function.
     axios
       .get(
         `https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_track=${this.state.trackTitle}&page_size=10&page=1&s_track_rating=desc&apikey=${

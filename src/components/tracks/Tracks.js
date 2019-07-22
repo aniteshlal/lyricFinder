@@ -9,7 +9,8 @@ class Tracks extends Component {
 			<Consumer>
 				{value => {
 					const { track_list, heading } = value;
-
+					// it returns the loading gif if the track_list hasn't been fetched
+					// and if it has been feteched then it displays them
 					if (track_list === undefined || track_list.length === 0) {
 						return <Spinner />
 					} else {

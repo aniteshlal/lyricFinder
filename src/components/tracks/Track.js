@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+
+// formats how each track is going to be displayed
 const Track = (props) => {
   const { track } = props;
 
